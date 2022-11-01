@@ -233,7 +233,7 @@ ng-select.ng-invalid.ng-touched .ng-select-container {
   border-color: #f00 !important;
 }
 
-#main, #footer {
+#main {
   margin-left: 230px;
 }
 

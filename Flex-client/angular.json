@@ -27,8 +27,6 @@
               "src/styles.css"
             ],
             "scripts": [
-              "src/assets/js/owa-custom.js",
-              "src/assets/js/owa.tracker-combined-min.js",
               "src/assets/js/main.js"
             ]
           },
@@ -99,8 +97,6 @@
               "src/styles.css"
             ],
             "scripts": [
-              "src/assets/js/owa-custom.js",
-              "src/assets/js/owa.tracker-combined-min.js"
             ]
           }
         }
