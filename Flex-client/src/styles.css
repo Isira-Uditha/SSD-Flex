@@ -1,1 +1,239 @@
+@import '~ngx-toastr/toastr';
+@import "~@ng-select/ng-select/themes/default.theme.css";
 /* You can add global styles to this file, and also import other style files */
+/*custom  styles*/
+body {
+  font-family: "Open Sans", sans-serif;
+  background: #ffffff;
+  color: #ffffff;
+}
+
+.header {
+  box-shadow: 0px 0px 0px rgb(1 41 112 / 10%) !important;
+  overflow: unset !important;
+}
+.card {
+  box-shadow: 0px 0 0px rgba(1, 41, 112, 0) !important;
+  border: #ffff !important;
+  padding-left: 20px;
+  padding-right:20px;
+  padding-bottom:20px;
+  background-color: rgba(0, 0, 0, 0.02) !important;
+}
+
+.sidebar {
+  box-shadow: 0px 0px 3px rgba(1, 41, 112, 0.1) !important;
+  overflow: unset !important;
+  top: 0px !important;
+  width: 220px;
+  background-color: rgba(233, 233, 233, 0.42) !important;
+  padding-left: unset !important;
+  padding-right: unset !important;
+}
+
+.logo img {
+  max-height: 35px !important;
+}
+
+div.card-body {
+  padding: 10px !important;
+  box-shadow: 0px 0px 0px rgba(1, 41, 112, 0.1) !important;
+}
+
+.popover-header{
+  color: #4f5050 !important;
+}
+
+.pop-div{
+  width: max-content !important;
+}
+
+.nav-pop .popover{
+  width: 580px !important;
+  max-width: 580px !important;
+}
+
+.list-group-item{
+  border: unset !important;
+}
+
+.list-group-item a {
+  color: #8c8c8d !important;
+  text-decoration: unset !important;
+}
+
+.align-items-center {
+  align-items: center!important;
+}
+
+.fixed-top {
+  z-index: 100 !important;
+}
+
+.toggle-menu {
+  margin-left: 200px !important;
+}
+
+.toggle-icon{
+  transition: 300ms !important;
+}
+
+.sidebar-nav .nav-link {
+  color: rgba(0, 0, 0, 0.68) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+.sidebar-nav .nav-link.collapsed {
+  background: rgba(233, 233, 233, 0) !important;
+}
+
+.sidebar-nav .nav-link:hover i {
+  color: rgba(0, 0, 0, 0.68) !important;
+}
+
+.sidebar-nav .nav-link i {
+  color: rgba(0, 0, 0, 0.68) !important;
+}
+
+.sidebar-nav .nav-content a:hover, .sidebar-nav .nav-content a.active {
+  color: rgba(0, 0, 0, 0.68) !important;
+}
+
+.sidebar-nav .nav-content a {
+  color: rgba(0, 0, 0, 0.68) !important;
+}
+
+a{
+  text-decoration-line: unset !important;
+}
+.nav-btn{
+  border-radius: 20px;
+  position: relative;
+  min-width: 160px;
+  width: 100%;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  font-weight: 500;
+  border: 2px solid rgba(0, 0, 0, 0.11);
+  color: rgba(0, 0, 0, 0.68) !important;
+  height: 36px;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+.cus-check.form-check-input:checked {
+  /*background-color: #28a745 !important;*/
+  /*border-color: #28a745 !important;*/
+}
+
+.pagetitle h1 {
+  font-size: 22px !important;
+  color: rgba(0, 0, 0, 0.68) !important;
+}
+
+.header .toggle-sidebar-btn {
+  color: rgba(0, 0, 0, 0.68) !important;
+}
+
+.border-non{
+  border: none !important;
+  background-color: rgba(233,233,233,0) !important;
+  font-size: 23px;
+}
+
+/*Toast Message Styles */
+.toast-message{
+  margin-top: 10px;
+  font-size: small;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+a:not([href]):not([class]), a:not([href]):not([class]):hover {
+  color: #cacaca;
+  text-decoration: none;
+}
+
+.modal {
+  color: #1a1e21 !important;
+}
+
+.list-group-item.active.role-color{
+  background-color: rgba(26, 30, 33, 0.73) !important;
+  padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+}
+
+.role-row .list-group-item{
+  padding: unset;
+}
+
+.list-group-item:first-child {
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
+}
+
+*:not(i) {
+  font-family: "Poppins", sans-serif !important;
+}
+
+th {
+  font-weight: 600;
+}
+
+h1,h2,h3,h4,h5,h6,p,hr,label {
+  color: var(--bs-body-color) !important;
+}
+
+.btn-primary{
+  background-color: #009DA0 !important;
+}
+
+.btn-primary{
+  background-color: #009DA0 !important;
+}
+.badge{
+  font-weight: unset;
+  --bs-badge-border-radius: 0.305rem !important;
+}
+
+.nav-link.active{
+  border-top: 3px solid #26808f !important;
+}
+
+label {
+  color: #75787d;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+::placeholder {
+  color: #75787d;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.ng-invalid.ng-touched {
+  border-color: #f00 !important;
+}
+
+ng-select.ng-invalid.ng-touched .ng-select-container {
+  border-color: #f00 !important;
+}
+
+.form-check-input.ng-invalid.ng-touched {
+  border-color: #f00 !important;
+}
+
+#main, #footer {
+  margin-left: 230px;
+}
+

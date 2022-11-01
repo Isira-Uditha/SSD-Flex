@@ -16,5 +16,8 @@ export class HeaderComponent implements OnInit {
   {
     //toggle sidebar function
     this.document.body.classList.toggle('toggle-sidebar');
+    const div =  document.querySelector('.toggle-icon');
+    // @ts-ignore
+    div.classList.toggle('toggle-menu');
   }
 }
