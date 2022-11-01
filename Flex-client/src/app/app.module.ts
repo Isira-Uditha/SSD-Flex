@@ -7,6 +7,7 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MessageComponent } from './components/custom-components/forms/message/message.component';
+import {PagesLoginComponent} from "./pages/pages-login/pages-login.component";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { MessageComponent } from './components/custom-components/forms/message/m
     SidebarComponent,
     DashboardComponent,
     MessageComponent,
+    PagesLoginComponent
   ],
   imports: [
     BrowserModule,
