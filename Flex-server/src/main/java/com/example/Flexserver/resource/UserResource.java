@@ -21,7 +21,7 @@ public class UserResource {
         return ResponseEntity.ok(this.userService.createUser(user));
     }
 
-    @GetMapping
+    @GetMapping("/{userId}")
     public ResponseEntity<Response> findUserById(@PathVariable String userId) {
         return ResponseEntity.ok(this.userService.findUserById(Integer.parseInt(userId)));
     }
