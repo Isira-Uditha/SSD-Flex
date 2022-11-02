@@ -16,4 +16,5 @@ export class AppComponent {
     s.src = "../assets/js/main.js";
     this.elementRef.nativeElement.appendChild(s);
   }
+
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
+import {ValidateInput} from "../../../../helper/helper";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-file-upload',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./file-upload.component.css']
 })
 export class FileUploadComponent implements OnInit {
+  insertedFile: any;
 
-  constructor() { }
+  constructor(
+    private el: ElementRef,
+    private toaster: ToastrService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  onSubmit(userForm: any) {
+    if (ValidateInput(userForm, this.el, this.toaster)) {
+
+    }
+  }
 }
