@@ -11,7 +11,7 @@ public class FileMapper implements RowMapper<File> {
     public File mapRow(ResultSet rs, int rowNum) throws SQLException {
         return File.builder()
                 .id(rs.getInt("id"))
-                .file(rs.getString("file"))
+                .filePath(rs.getString("file_path"))
                 .userId(rs.getInt("user_id"))
                 .build();
     }
