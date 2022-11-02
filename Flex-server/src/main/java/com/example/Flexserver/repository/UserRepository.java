@@ -9,6 +9,6 @@ public interface UserRepository {
 
     List<User> findUserById(int userId);
 
-    List<User> createUser(User user);
+    long createUser(User user);
 
 }

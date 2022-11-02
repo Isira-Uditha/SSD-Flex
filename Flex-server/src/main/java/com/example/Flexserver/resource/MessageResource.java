@@ -1,7 +1,6 @@
 package com.example.Flexserver.resource;
 
 import com.example.Flexserver.domain.model.Message;
-import com.example.Flexserver.domain.model.User;
 import com.example.Flexserver.domain.response.Response;
 import com.example.Flexserver.service.MessageService;
 import org.springframework.http.ResponseEntity;
