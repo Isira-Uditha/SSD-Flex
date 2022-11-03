@@ -25,13 +25,13 @@ public class FileRepositoryImpl implements FileRepository{
 
     @Override
     public long createFile(File file) {
-        StringBuilder query = new StringBuilder("INSERT INTO file(file, user_id) VALUES (?, ?)");
+        StringBuilder query = new StringBuilder("INSERT INTO file(file_path, user_id) VALUES (?, ?)");
 
         KeyHolder key = new GeneratedKeyHolder();
 
         jdbcTemplate.update(con -> {
             final PreparedStatement ps = con.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, file.getFile());
+            ps.setString(1, file.getFilePath());
             ps.setInt(2, file.getUserId());
             return ps;
         }, key);

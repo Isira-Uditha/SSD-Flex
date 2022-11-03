@@ -9,6 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 public class File {
     private int id;
-    private String file;
+    private String filePath;
     private int userId;
 }
