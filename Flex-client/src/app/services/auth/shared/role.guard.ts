@@ -5,6 +5,7 @@ import {Store} from "../store";
 import {AuthService} from "./auth.service";
 import {ToastrService} from "ngx-toastr";
 import {AUTH} from "../constants";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class RoleGuard implements CanActivate {
   }
   canActivate() {
     let Role = this.store.getData(AUTH.role);
-    if(Role == "manager"){
+    if(Role == environment.role){
       return true;
     }
     this.toaster.error('You don\'t have admin rights.', 'Unauthorized Action!',{
