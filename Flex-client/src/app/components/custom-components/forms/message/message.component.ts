@@ -1,6 +1,8 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {ToastrService} from "ngx-toastr";
 import {ValidateInput} from "../../../../helper/helper";
+import {Message} from "../../../../models/message";
+import {MessageService} from "../../../../services/service/message.service";
 
 @Component({
   selector: 'app-message',
@@ -8,20 +10,33 @@ import {ValidateInput} from "../../../../helper/helper";
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit {
-  create: any;
-  message: any;
+  message: Message = new Message();
+
 
   constructor(
     private el: ElementRef,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(userForm: any) {
+    //Check the validations
     if (ValidateInput(userForm, this.el, this.toaster)) {
-
+        //This is required to create the message
+        this.messageService.createMessage(this.message).subscribe(
+          (res: any) => {
+            this.toaster.success('Message has been created successfully.', 'Message Created!',{
+              closeButton: true,
+            });
+          },(error: any) => {
+            this.toaster.error('Please try again latter.', 'Something went wrong!',{
+              closeButton: true,
+            });
+          }
+        )
     }
   }
 }

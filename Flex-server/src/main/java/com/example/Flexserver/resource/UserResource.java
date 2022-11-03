@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UserResource {
 
     private final UserService userService;
@@ -24,5 +25,10 @@ public class UserResource {
     @GetMapping("/{userId}")
     public ResponseEntity<Response> findUserById(@PathVariable String userId) {
         return ResponseEntity.ok(this.userService.findUserById(Integer.parseInt(userId)));
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<Response> findUserByUserNameAndPassword(@RequestParam(required = true) String username,@RequestParam(required = true) String password) {
+        return ResponseEntity.ok(this.userService.findUserByUserNameAndPassword(username,password));
     }
 }

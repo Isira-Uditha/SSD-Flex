@@ -5,13 +5,14 @@ import com.example.Flexserver.domain.model.User;
 import com.example.Flexserver.domain.response.Response;
 import com.example.Flexserver.service.FileService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/file")
+@CrossOrigin
 public class FileResource {
 
     private final FileService fileService;
@@ -21,7 +22,7 @@ public class FileResource {
     }
 
     @PostMapping
-    public ResponseEntity<Response> createFile(@RequestBody File file) {
-        return ResponseEntity.ok(this.fileService.createFile(file));
+    public ResponseEntity<Response> createFile(@RequestParam(required = true) String userId, @RequestBody MultipartFile file) throws IOException {
+        return ResponseEntity.ok(this.fileService.createFile(file,userId));
     }
 }

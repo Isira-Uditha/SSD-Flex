@@ -39,6 +39,17 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
+    public List<User> findUserByUserNameAndPassword(String userName, String password) {
+        StringBuilder query = new StringBuilder("SELECT * FROM user WHERE username=:username AND password=:password");
+
+        MapSqlParameterSource param = new MapSqlParameterSource();
+        param.addValue("username", userName);
+        param.addValue("password", password);
+
+        return namedParameterJdbcTemplate.query(query.toString(), param, new UserMapper());
+    }
+
+    @Override
     public long createUser(User user) {
         StringBuilder query = new StringBuilder("INSERT INTO user(username, name, password, role) ");
         query.append("VALUES (?,?,?,?)");

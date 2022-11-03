@@ -9,8 +9,10 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MessageComponent } from './components/custom-components/forms/message/message.component';
 import {PagesLoginComponent} from "./pages/pages-login/pages-login.component";
 import {FormModule} from "./components/custom-components/forms/forms.module";
-import {ToastrModule} from "ngx-toastr";
+import {ToastNoAnimationModule, ToastrModule} from "ngx-toastr";
 import {NgxPermissionsModule} from "ngx-permissions";
+import {HttpClientModule} from "@angular/common/http";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -22,9 +24,12 @@ import {NgxPermissionsModule} from "ngx-permissions";
   ],
     imports: [
         BrowserModule,
+        CommonModule,
         AppRoutingModule,
         FormModule,
+        HttpClientModule,
         ToastrModule.forRoot(),
+        ToastNoAnimationModule.forRoot(),
         NgxPermissionsModule.forRoot(),
     ],
   providers: [],

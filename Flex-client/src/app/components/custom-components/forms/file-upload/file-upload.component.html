@@ -21,7 +21,8 @@
                   <div class="mb-1">
                     <input
                       class="form-control"
-                      [(ngModel)]="insertedFile"
+                      (change)="onChange($event)"
+                      [(ngModel)]="file"
                       name="insertedFile"
                       type="file"
                       id="insertedFile"

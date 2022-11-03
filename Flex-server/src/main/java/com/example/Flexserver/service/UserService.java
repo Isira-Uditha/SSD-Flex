@@ -7,6 +7,8 @@ public interface UserService {
 
     Response findUserById(int userId);
 
+    Response findUserByUserNameAndPassword(String userName, String password);
+
     Response createUser(User user);
 
 

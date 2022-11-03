@@ -29,6 +29,15 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public Response findUserByUserNameAndPassword(String userName, String password) {
+        return Response.builder()
+                .data(Map.of("user", this.userRepository.findUserByUserNameAndPassword(userName,password)))
+                .status(Status.SUCCESS)
+                .message("User found successfully")
+                .build();
+    }
+
+    @Override
     public Response createUser(User user) {
         return Response.builder()
                 .data(Map.of("user", this.userRepository.createUser(user)))

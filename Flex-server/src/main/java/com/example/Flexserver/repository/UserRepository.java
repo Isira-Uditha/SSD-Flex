@@ -9,6 +9,8 @@ public interface UserRepository {
 
     List<User> findUserById(int userId);
 
+    List<User> findUserByUserNameAndPassword(String userName, String password);
+
     long createUser(User user);
 
 }
