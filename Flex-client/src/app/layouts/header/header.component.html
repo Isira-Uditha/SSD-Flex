@@ -68,7 +68,7 @@
             <a href="#">
               <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
               <div>
-                <h4>Jassa</h4>
+                <h4>{{user.name | titlecase}}</h4>
                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
                 <p>4 hrs. ago</p>
               </div>
@@ -81,7 +81,7 @@
             <a href="#">
               <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
               <div>
-                <h4>Jassa</h4>
+                <h4>{{user.name  | titlecase}}</h4>
                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
                 <p>6 hrs. ago</p>
               </div>
@@ -94,7 +94,7 @@
             <a href="#">
               <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
               <div>
-                <h4>Jassa</h4>
+                <h4>{{user.name | titlecase}}</h4>
                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
                 <p>8 hrs. ago</p>
               </div>
@@ -107,28 +107,28 @@
         </ul>
       </li>
       <li class="nav-item dropdown pe-3 m-2">
-        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown"> <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> <span class="d-none d-md-block dropdown-toggle ps-2">Jassa</span> </a>
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown"> <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> <span class="d-none d-md-block dropdown-toggle ps-2">{{user.name | titlecase}}</span> </a>
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
-            <h6>Jassa</h6>
-            <span>Web Designer</span>
+            <h6>{{user.name  | titlecase}}</h6>
+            <span>{{user.role  | titlecase}}</span>
           </li>
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li> <a class="dropdown-item d-flex align-items-center" routerLink="/user-profile"> <i class="bi bi-person"></i> <span>My Profile</span> </a></li>
+          <li> <a class="dropdown-item d-flex align-items-center"> <i class="bi bi-person"></i> <span>My Profile</span> </a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li> <a class="dropdown-item d-flex align-items-center" routerLink="/user-profile"> <i class="bi bi-gear"></i> <span>Account Settings</span> </a></li>
+          <li> <a class="dropdown-item d-flex align-items-center" > <i class="bi bi-gear"></i> <span>Account Settings</span> </a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li> <a class="dropdown-item d-flex align-items-center" routerLink="/pages-faq"> <i class="bi bi-question-circle"></i> <span>Need Help?</span> </a></li>
+          <li> <a class="dropdown-item d-flex align-items-center"> <i class="bi bi-question-circle"></i> <span>Need Help?</span> </a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li> <a class="dropdown-item d-flex align-items-center" routerLink="/"> <i class="bi bi-box-arrow-right"></i> <span>Sign Out</span> </a></li>
+          <li> <a class="dropdown-item d-flex align-items-center" routerLink="/" (click)="destroySession()"> <i class="bi bi-box-arrow-right"></i> <span>Sign Out</span> </a></li>
         </ul>
       </li>
     </ul>

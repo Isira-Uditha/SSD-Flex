@@ -3,6 +3,8 @@ import {ValidateInput} from "../../../../helper/helper";
 import {ToastrService} from "ngx-toastr";
 import {FileService} from "../../../../services/service/file.service";
 import {InsertedFile} from "../../../../models/file";
+import {Store} from "../../../../services/auth/store";
+import {AUTH} from "../../../../services/auth/constants";
 
 @Component({
   selector: 'app-file-upload',
@@ -15,7 +17,8 @@ export class FileUploadComponent implements OnInit {
   constructor(
     private el: ElementRef,
     private toaster: ToastrService,
-    private fileService: FileService
+    private fileService: FileService,
+    private store: Store,
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +39,7 @@ export class FileUploadComponent implements OnInit {
       formData.append('file',this.file,this.file.name)
 
       //This is required to upload the file
-      this.fileService.createFile(formData,1).subscribe(
+      this.fileService.createFile(formData,this.store.getData(AUTH.id)).subscribe(
         (res: any) => {
           this.toaster.success('File has been uploaded successfully.', 'File Uploaded!',{
             closeButton: true,

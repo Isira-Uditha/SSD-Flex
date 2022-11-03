@@ -13,7 +13,7 @@ export class ApiUserService {
     this._findUserById =
       _apiService.flexApiGatewayUrl + "/user/{userId}";
     this._findUserByUsernameAndPassword =
-      _apiService.flexApiGatewayUrl + "/user/login/{userName}/{password}";
+      _apiService.flexApiGatewayUrl + "/user/login?username={username}&password={password}";
     this._createUser =
       _apiService.flexApiGatewayUrl + "/user";
   }

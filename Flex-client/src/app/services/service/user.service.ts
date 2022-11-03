@@ -20,7 +20,7 @@ export class UserService {
 
   findUserByUsernameAndPassword(userName: any, password: any){
     return this.httpService.httpGet(
-      this.apiUserService.findUserByUsernameAndPassword.replace('{userName}',userName).replace('{password}',password)
+      this.apiUserService.findUserByUsernameAndPassword.replace('{username}',userName).replace('{password}',password)
     );
   }
 

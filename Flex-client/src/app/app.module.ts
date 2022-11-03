@@ -13,6 +13,8 @@ import {ToastNoAnimationModule, ToastrModule} from "ngx-toastr";
 import {NgxPermissionsModule} from "ngx-permissions";
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
+import {Store} from "./services/auth/store";
 
 @NgModule({
   declarations: [
@@ -22,17 +24,20 @@ import {CommonModule} from "@angular/common";
     DashboardComponent,
     PagesLoginComponent,
   ],
-    imports: [
-        BrowserModule,
-        CommonModule,
-        AppRoutingModule,
-        FormModule,
-        HttpClientModule,
-        ToastrModule.forRoot(),
-        ToastNoAnimationModule.forRoot(),
-        NgxPermissionsModule.forRoot(),
-    ],
-  providers: [],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    AppRoutingModule,
+    FormModule,
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    ToastNoAnimationModule.forRoot(),
+    NgxPermissionsModule.forRoot(),
+    FormsModule,
+  ],
+  providers: [
+    Store,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
