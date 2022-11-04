@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -39,14 +40,18 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
-    public List<User> findUserByUserNameAndPassword(String userName, String password) {
-        StringBuilder query = new StringBuilder("SELECT * FROM user WHERE username=:username AND password=:password");
+    public List<User> findUserByUserName(String userName) {
+        StringBuilder query = new StringBuilder("SELECT * FROM user WHERE username=:username ");
 
         MapSqlParameterSource param = new MapSqlParameterSource();
         param.addValue("username", userName);
-        param.addValue("password", password);
 
         return namedParameterJdbcTemplate.query(query.toString(), param, new UserMapper());
+    }
+
+    @Override
+    public boolean checkPassword(String enteredPassword, String password, PasswordEncoder passwordEncoder) {
+        return passwordEncoder.matches(enteredPassword,password);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.Flexserver;
 
 import com.example.Flexserver.domain.model.User;
 import com.example.Flexserver.repository.UserRepository;
+import com.example.Flexserver.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,18 +15,16 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class FlexServerApplicationTests {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 
 	@Test
 	public void testUserCreate() {
 		User user = new User();
-		user.setUsername("isira.uditha");
-		user.setName("Isira Uditha");
-		user.setRole("manager");
+		user.setUsername("sasika.chathura");
+		user.setName("Sasika Chathura");
+		user.setRole("worker");
 		user.setPassword("123");
-		assertThat(userRepository.createUser(user));
-
-
+		assertThat(userService.createUser(user));
 
 	}
 
