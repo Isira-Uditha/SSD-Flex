@@ -4,4 +4,5 @@ export const AUTH = {
   name: 'auth.name',
   role: 'auth.role',
   password: 'auth.password',
+  token: 'auth.token',
 };

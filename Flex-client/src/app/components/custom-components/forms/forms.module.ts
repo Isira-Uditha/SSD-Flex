@@ -13,6 +13,7 @@ import {FormsModule} from "@angular/forms";
     FileUploadComponent
   ],
   imports: [
+    CommonModule,
     FormsRoutingModule,
     FormsModule
   ],

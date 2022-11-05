@@ -25,8 +25,16 @@ export class FileUploadComponent implements OnInit {
   }
 
   onChange(event : any) {
-    this.file = event.target.files[0];
-    debugger;
+
+    if(event.target.files[0].type == "application/pdf" || event.target.files[0].type == "image/png" || event.target.files[0].type == "image/jpg"){
+      this.file = event.target.files[0];
+    }else{
+      this.file = null;
+      this.toaster.error('You cannot enter zip files.', 'File type error!',{
+        closeButton: true,
+      });
+    }
+
   }
 
   onSubmit(userForm: any) {
