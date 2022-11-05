@@ -12,6 +12,6 @@ export class AuthService {
   ) { }
 
   IsLoggedIn(){
-    return !!this.store.getData(AUTH.id);
+    return !!this.store.getData(AUTH.id) && this.store.getData(AUTH.token) && this.store.getData(AUTH.role) && this.store.getData(AUTH.username);
   }
 }

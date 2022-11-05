@@ -1,7 +1,5 @@
 package com.example.Flexserver.resource;
 
-import com.example.Flexserver.domain.model.File;
-import com.example.Flexserver.domain.model.User;
 import com.example.Flexserver.domain.response.Response;
 import com.example.Flexserver.service.FileService;
 import org.springframework.http.ResponseEntity;

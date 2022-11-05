@@ -1,7 +1,6 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {User} from "../../models/user";
 import {ToastrService} from "ngx-toastr";
-import {MessageService} from "../../services/service/message.service";
 import {ValidateInput} from "../../helper/helper";
 import {UserService} from "../../services/service/user.service";
 import {Router} from "@angular/router";
@@ -31,18 +30,18 @@ export class PagesLoginComponent implements OnInit {
     //Check the validations
     if (ValidateInput(userForm, this.el, this.toaster)) {
       //This is required to create the message
-      this.userService.findUserByUsernameAndPassword(this.user.username, this.user.password).subscribe(
+      this.userService.loginIn(this.user.username, this.user.password).subscribe(
         (res: any) => {
+          debugger;
           // this.router.navigate(['/dashboard']);
           // @ts-ignore
-          if(!res.data.user.length == 0){
+          if(res != null){
 
             //Set session data
-            this.store.setData(AUTH.id, res.data.user[0].id);
-            this.store.setData(AUTH.username, res.data.user[0].username);
-            this.store.setData(AUTH.name, res.data.user[0].name);
-            this.store.setData(AUTH.role, res.data.user[0].role);
-            this.store.setData(AUTH.password, res.data.user[0].password);
+            this.store.setData(AUTH.id, res.id);
+            this.store.setData(AUTH.username, res.username);
+            this.store.setData(AUTH.role, res.role);
+            this.store.setData(AUTH.token, res.access_token);
 
             //If validated navigate to the dashboard
             this.router.navigate(['/dashboard']);
@@ -57,7 +56,7 @@ export class PagesLoginComponent implements OnInit {
           }
 
         },(error: any) => {
-          this.toaster.error('Please try again latter.', 'Something went wrong!',{
+          this.toaster.error('Please provide valid details.', 'Login Unsuccessful!',{
             closeButton: true,
           });
         }

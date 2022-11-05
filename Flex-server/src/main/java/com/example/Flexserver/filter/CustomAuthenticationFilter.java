@@ -2,8 +2,10 @@ package com.example.Flexserver.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.example.Flexserver.repository.mapper.UserMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,8 +31,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
 
-    public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    public CustomAuthenticationFilter(AuthenticationManager authenticationManager, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.authenticationManager = authenticationManager;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     @Override
@@ -63,8 +68,27 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         token.put("access_token",access_token);
         token.put("refresh_token",refresh_token);
 
-        response.setContentType(APPLICATION_JSON_VALUE);
-        new ObjectMapper().writeValue(response.getOutputStream(),token);
+        com.example.Flexserver.domain.model.User newUser = this.getUserByUsername(user.getUsername());
 
+        Map<String, String> object = new HashMap<>();
+
+        object.put("id", String.valueOf(newUser.getId()));
+        object.put("role", newUser.getRole());
+        object.put("username", user.getUsername());
+        object.put("access_token", access_token);
+        object.put("refresh_token", refresh_token);
+        object.put("status","200");
+
+        response.setContentType(APPLICATION_JSON_VALUE);
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type,Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+        new ObjectMapper().writeValue(response.getOutputStream(),object);
+
+    }
+
+    private com.example.Flexserver.domain.model.User getUserByUsername(String username){
+
+        String query = "SELECT * FROM user WHERE  username =:username";
+        return namedParameterJdbcTemplate.queryForObject(query, Collections.singletonMap("username", username), new UserMapper());
     }
 }
