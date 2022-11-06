@@ -3,8 +3,10 @@ package com.example.Flexserver.filter;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.Flexserver.repository.mapper.UserMapper;
+import com.example.Flexserver.utils.GenerateKeys;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,15 +16,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -31,18 +33,40 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
 
+    private final GenerateKeys generateKeys ;
+
+    @Value("${APPID}")
+    private String appId = "123";
+
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    public CustomAuthenticationFilter(AuthenticationManager authenticationManager, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public CustomAuthenticationFilter(AuthenticationManager authenticationManager, GenerateKeys generateKeys, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.authenticationManager = authenticationManager;
+        this.generateKeys = generateKeys;
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        log.info("Username is: {}", username);log.info("Password is: {}", password);
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,password);
+
+        String username = request.getParameter("username").replace(' ', '+');
+        String password = request.getParameter("password").replace(' ', '+');
+        String dyUsername = "";
+        String dyPassword = "";
+
+        //Decrypt the username and password
+        try {
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.DECRYPT_MODE, generateKeys.readPrivateKey(appId));
+            byte[] encodedUsername = Base64.getDecoder().decode(username);
+            byte[] encodedPassword= Base64.getDecoder().decode(password);
+            dyUsername = new String(cipher.doFinal(encodedUsername),  "UTF-8");
+            dyPassword = new String(cipher.doFinal(encodedPassword),  "UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        log.info("Username is: {}", dyUsername);log.info("Password is: {}", dyPassword);
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dyUsername,dyPassword);
 
         return authenticationManager.authenticate(authenticationToken);
     }
