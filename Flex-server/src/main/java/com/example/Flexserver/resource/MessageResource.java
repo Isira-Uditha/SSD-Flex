@@ -6,6 +6,9 @@ import com.example.Flexserver.service.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.NoSuchPaddingException;
+import java.security.NoSuchAlgorithmException;
+
 @RestController
 @RequestMapping("/message")
 @CrossOrigin
@@ -18,7 +21,7 @@ public class MessageResource {
     }
 
     @PostMapping
-    public ResponseEntity<Response> createMessage(@RequestBody Message message) {
+    public ResponseEntity<Response> createMessage(@RequestBody Message message) throws NoSuchPaddingException, NoSuchAlgorithmException {
         return ResponseEntity.ok(this.messageService.createMessage(message));
     }
 }

@@ -5,4 +5,5 @@ export const AUTH = {
   role: 'auth.role',
   password: 'auth.password',
   token: 'auth.token',
+  rsaKey: 'auth.token',
 };
