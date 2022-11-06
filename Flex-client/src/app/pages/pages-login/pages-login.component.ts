@@ -49,7 +49,6 @@ export class PagesLoginComponent implements OnInit {
       // @ts-ignore
       var encryptedUsername = window.btoa(rsa.encrypt(this.user.username));
       var encryptedPassword = window.btoa(rsa.encrypt(this.user.password));
-      debugger;
 
       //This is required to create the message
       this.userService.loginIn(encryptedUsername, encryptedPassword).subscribe(
