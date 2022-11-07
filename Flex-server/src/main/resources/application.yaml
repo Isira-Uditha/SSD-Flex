@@ -43,3 +43,4 @@ security:
 
 CRON-EXPRESSION: '*/10 * * * * *'
 APPID: '123'
+ALGORITHM: 'RSA'
