@@ -16,7 +16,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -50,20 +49,17 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
         String username = request.getParameter("username").replace(' ', '+');
         String password = request.getParameter("password").replace(' ', '+');
-        String dyUsername = "";
-        String dyPassword = "";
 
         //Decrypt the username and password
+        String dyUsername = "";
+        String dyPassword = "";
         try {
-            Cipher cipher = Cipher.getInstance("RSA");
-            cipher.init(Cipher.DECRYPT_MODE, generateKeys.readPrivateKey(appId));
-            byte[] encodedUsername = Base64.getDecoder().decode(username);
-            byte[] encodedPassword= Base64.getDecoder().decode(password);
-            dyUsername = new String(cipher.doFinal(encodedUsername),  "UTF-8");
-            dyPassword = new String(cipher.doFinal(encodedPassword),  "UTF-8");
-        } catch (Exception e) {
-            e.printStackTrace();
+            dyUsername = generateKeys.decrypt(username);
+            dyPassword =  generateKeys.decrypt(password);
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
+
 
         log.info("Username is: {}", dyUsername);log.info("Password is: {}", dyPassword);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dyUsername,dyPassword);
