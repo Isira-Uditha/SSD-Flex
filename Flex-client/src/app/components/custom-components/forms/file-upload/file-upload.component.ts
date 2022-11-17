@@ -30,7 +30,7 @@ export class FileUploadComponent implements OnInit {
       this.file = event.target.files[0];
     }else{
       this.file = null;
-      this.toaster.error('You cannot enter zip files.', 'File type error!',{
+      this.toaster.error('You cannot enter these files.', 'File type error!',{
         closeButton: true,
       });
     }
