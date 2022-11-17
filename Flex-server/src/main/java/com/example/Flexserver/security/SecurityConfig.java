@@ -2,6 +2,7 @@ package com.example.Flexserver.security;
 
 import com.example.Flexserver.filter.CustomAuthenticationFilter;
 import com.example.Flexserver.filter.CustomAuthorizationFilter;
+import com.example.Flexserver.utils.Constants;
 import com.example.Flexserver.utils.GenerateKeys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -40,8 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/**").permitAll();
         http.authorizeRequests().antMatchers("/key").permitAll();
         http.authorizeRequests().antMatchers("/login/**","/api/v1/user/token/refresh/**").permitAll();
-        http.authorizeRequests().antMatchers(POST, "/api/v1/user/**").hasAnyAuthority("manager");
-        http.authorizeRequests().antMatchers(POST, "/api/v1/file/**").hasAnyAuthority("manager");
+        http.authorizeRequests().antMatchers(POST, "/api/v1/user/**").hasAnyAuthority(Constants.MANAGER_ROLE);
+        http.authorizeRequests().antMatchers(POST, "/api/v1/file/**").hasAnyAuthority(Constants.MANAGER_ROLE);
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(new CustomAuthenticationFilter(authenticationManager(), generateKeys, namedParameterJdbcTemplate));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

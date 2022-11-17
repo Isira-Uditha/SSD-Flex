@@ -33,7 +33,7 @@ public class GenerateKeys {
     private static final String PRIVATEKEY_POSTFIX = "-----END RSA PRIVATE KEY-----";
 
     private void generateSecureKeys() throws NoSuchAlgorithmException, NoSuchProviderException {
-        this.keyGen = KeyPairGenerator.getInstance("RSA");
+        this.keyGen = KeyPairGenerator.getInstance(Constants.RSA);
         this.keyGen.initialize(1024);
     }
 
@@ -82,7 +82,7 @@ public class GenerateKeys {
                 .replace("-----END RSA PRIVATE KEY-----", "");
         byte[] keyBytes = DatatypeConverter.parseBase64Binary(fileString);
         PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
-        KeyFactory kf = KeyFactory.getInstance("RSA");
+        KeyFactory kf = KeyFactory.getInstance(Constants.RSA);
         key = kf.generatePrivate(spec);
         return key;
     }
@@ -91,9 +91,9 @@ public class GenerateKeys {
         //Decrypt the message
         Cipher cipher = Cipher.getInstance(algorithm);
         try {
-            cipher.init(Cipher.DECRYPT_MODE, this.readPrivateKey(appId));
+            cipher.init(Cipher.DECRYPT_MODE, this.readPrivateKey(Constants.APP_ID));
             byte[] encodedMessage = Base64.getDecoder().decode(encryptedData);
-            String dyMessage = new String(cipher.doFinal(encodedMessage), "UTF-8");
+            String dyMessage = new String(cipher.doFinal(encodedMessage), Constants.UTF8);
             return dyMessage;
         } catch (Exception e) {
             e.printStackTrace();
